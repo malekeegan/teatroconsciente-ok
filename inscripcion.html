@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teatro Consciente — Preinscripción 2027</title>
+<meta name="description" content="Preinscripción 2027 de Teatro Consciente. Guardá tu lugar para el año que viene.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiNCMjNBMkEiLz48dGV4dCB4PSIzMiIgeT0iNDQiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjM0IiBmaWxsPSIjRjRGMUU5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UQzwvdGV4dD48L3N2Zz4K">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<style>
+/* ===========================================================
+   Teatro Consciente — estilos compartidos (todas las páginas)
+   =========================================================== */
+
+/* Reset / base común */
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+a{text-decoration:none}
+::selection{background:#B23A2A;color:#E5E2DA}
+img,iframe{max-width:100%}
+[data-root]{overflow-x:clip}
+
+/* Helpers responsive heredados del diseño */
+@media (max-width:768px){ .desknav{display:none !important} }
+@media (max-width:768px){ .r-stack{grid-template-columns:1fr !important} }
+@media (max-width:768px){ .r-wide{max-width:100% !important} .r-wm{font-size:clamp(90px,30vw,170px) !important;opacity:.055 !important} }
+@media (max-width:620px){ .r-row{grid-template-columns:34px 1fr !important;row-gap:14px !important} .r-row > :nth-child(3){grid-column:2 !important} }
+@media (max-width:480px){ .r-3{grid-template-columns:1fr 1fr !important;row-gap:26px !important} }
+
+/* ---- Botón hamburguesa (menú móvil) ---- */
+.tc-burger{
+  display:none;position:absolute;top:50%;transform:translateY(-50%);
+  right:clamp(20px,5vw,80px);z-index:41;
+  align-items:center;justify-content:center;width:40px;height:40px;
+  border:0;padding:0;border-radius:0;
+  background:none;color:#EDE8DF;cursor:pointer;
+}
+@media (max-width:768px){ .tc-burger{display:inline-flex} }
+
+/* ---- Overlay del menú móvil ---- */
+.tc-menu{
+  position:fixed;inset:0;z-index:50;background:#1B1613;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .4s ease, visibility .4s ease;
+  overflow-y:auto;
+}
+.tc-menu.open{opacity:1;visibility:visible;pointer-events:auto}
+
+/* ---- Modal (Home: preinscripción) ---- */
+.tc-modal{
+  position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+.tc-modal.open{opacity:1;visibility:visible;pointer-events:auto}
+
+/* ---- Sello decorativo "2027" de la banda CTA: en mobile estorba el título, lo ocultamos ---- */
+@media (max-width:700px){
+  div[style*="top: -53px"]{ display:none !important; }
+}
+
+/* ---- Animación de aparición al hacer scroll ---- */
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease}
+[data-reveal].tc-shown{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1 !important;transform:none !important}
+}
+
+</style>
+<style>
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#E5E2DA;color:#26221F;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  *{box-sizing:border-box}
+  a{color:#B23A2A;text-decoration:none}
+  a:hover{color:#8f2c1f}
+  ::selection{background:#B23A2A;color:#E5E2DA}
+  [data-root]{overflow-x:clip}
+  [data-root]{min-height:100vh;display:flex;flex-direction:column}
+  [data-root] > section{flex:1 0 auto}
+  img,iframe{max-width:100%}
+  @media (max-width:768px){ .desknav{display:none !important} .burger{display:inline-flex !important} }
+  .burger{display:none;align-items:center;justify-content:center;width:40px;height:40px;border:0;padding:0;background:none;color:#EDE8DF;cursor:pointer}
+  /* sello */
+  @keyframes psealspin{to{transform:rotate(360deg)}}
+  .pring{animation:psealspin 24s linear infinite;transform-origin:100px 100px}
+  @media (prefers-reduced-motion:reduce){.pring{animation:none}}
+  /* ===== formulario (restyle sobre la marca) ===== */
+  .tc-form{
+    --tiza:#F4F1E9; --negro:#1B1613; --rojo:#B23A2A; --dorado:#C2A15A;
+    --linea:rgba(38,34,31,.2); --gris:#6b6459;
+    font-family:'DM Sans',system-ui,sans-serif; color:#26221F;
+    max-width:660px; margin:0 auto; padding:clamp(30px,5vw,54px) clamp(20px,5vw,30px) clamp(56px,8vw,88px);
+    line-height:1.6; font-size:16px; position:relative;
+  }
+  .tc-form *,.tc-form *::before,.tc-form *::after{box-sizing:border-box}
+  .tc-form [hidden]{display:none !important}
+  .tc-eyebrow{color:var(--rojo);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;margin:0 0 12px}
+  .tc-form h1{font-family:'Cormorant Garamond',serif;font-style:normal;font-weight:300;font-size:clamp(34px,7vw,56px);line-height:1.02;letter-spacing:-.015em;margin:0 0 10px;color:#26221F}
+  .tc-form h1 i,.tc-form h1 em{font-style:italic}
+  .tc-form h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(24px,3vw,30px);margin:42px 0 6px;color:#26221F}
+  .tc-lead{font-size:16px;color:var(--gris);margin:0 0 6px}
+  .tc-nota{color:var(--gris);font-size:15px;margin:0 0 6px}
+  .tc-campo{margin:22px 0 0;border:0;padding:0;min-width:0}
+  .tc-form label,.tc-form legend{display:block;font-weight:500;font-size:14.5px;margin:0 0 7px;padding:0;color:#2b2621}
+  .tc-ayuda{display:block;font-weight:400;color:var(--gris);font-size:14px;margin:0 0 9px;line-height:1.5}
+  .tc-req{color:var(--rojo);margin-left:2px}
+  .tc-form input[type="text"],.tc-form input[type="email"],.tc-form input[type="tel"],
+  .tc-form input[type="number"],.tc-form select,.tc-form textarea{
+    width:100%;font:inherit;font-size:16px;color:#26221F;background:#FBF8F2;
+    border:1.5px solid var(--linea);border-radius:12px;padding:14px 15px;appearance:none;-webkit-appearance:none;
+    transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+  }
+  .tc-form input::placeholder,.tc-form textarea::placeholder{color:#b0a89a}
+  .tc-form select{
+    background-image:linear-gradient(45deg,transparent 50%,#26221F 50%),linear-gradient(135deg,#26221F 50%,transparent 50%);
+    background-position:calc(100% - 21px) 55%, calc(100% - 15px) 55%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:42px;cursor:pointer;
+  }
+  .tc-form textarea{min-height:112px;resize:vertical}
+  .tc-form input:focus,.tc-form select:focus,.tc-form textarea:focus{outline:none;border-color:var(--rojo);box-shadow:0 0 0 3px rgba(178,58,42,.18);background:#fff}
+  .tc-form input:user-invalid,.tc-form select:user-invalid,.tc-form textarea:user-invalid{border-color:#c0492f}
+  .tc-opciones{display:grid;gap:9px}
+  .tc-opcion{display:flex;align-items:flex-start;gap:12px;font-weight:400 !important;font-size:15.5px;background:#FBF8F2;border:1.5px solid var(--linea);border-radius:12px;padding:13px 15px;cursor:pointer;margin:0 !important;transition:border-color .18s ease, background .18s ease}
+  .tc-opcion:hover{border-color:rgba(178,58,42,.45)}
+  .tc-opcion:has(input:checked){border-color:var(--rojo);background:#F7E9E3}
+  .tc-opcion:focus-within{box-shadow:0 0 0 3px rgba(178,58,42,.18)}
+  .tc-opcion input{margin-top:3px;accent-color:var(--rojo);width:18px;height:18px;flex:none}
+  .tc-bloque{margin-top:10px;padding:6px 0 0 20px;border-left:3px solid var(--dorado)}
+  .tc-aviso{background:#B23A2A;color:#F7F2EA;border-radius:14px;padding:18px 20px;margin:22px 0 0;font-size:15px;line-height:1.6}
+  .tc-aviso p{margin:0 0 10px}
+  .tc-aviso p:last-child{margin:0}
+  .tc-aviso strong{font-family:'DM Sans',sans-serif;font-weight:600;font-size:16px}
+  .tc-info{margin-top:12px;border-top:1.5px solid #26221F}
+  .tc-info p{margin:0;padding:15px 0;border-bottom:1px solid var(--linea)}
+  .tc-info strong{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rojo);margin-bottom:3px}
+  .tc-enviar{margin-top:32px;width:100%;font:inherit;font-weight:600;font-size:15px;letter-spacing:.06em;background:var(--rojo);color:#F4F1E9;border:0;border-radius:999px;padding:17px 24px;cursor:pointer;transition:background .2s ease, transform .05s ease}
+  .tc-enviar:hover{background:#9a3123}
+  .tc-enviar:active{transform:translateY(1px)}
+  .tc-enviar:focus-visible{outline:3px solid var(--dorado);outline-offset:3px}
+  .tc-enviar[disabled]{opacity:.6;cursor:wait}
+  .tc-estado{margin:16px 0 0;font-weight:500;font-size:15px;color:var(--gris)}
+  .tc-estado:empty{display:none}
+  .tc-estado.sending{color:var(--gris)}
+  .tc-estado.error{color:#fff;background:#b1331f;border-radius:12px;padding:14px 16px;line-height:1.5}
+  .tc-estado.ok{color:#1f5a38;background:#e7efe8;border:1px solid #cfe0d2;border-radius:12px;padding:14px 16px;line-height:1.5}
+  .tc-estado.error strong{display:block;font-weight:600;margin-bottom:8px}
+  .tc-estado.error ul{margin:0;padding-left:20px}
+  .tc-estado.error li{margin:3px 0}
+  .tc-form .tc-invalid{border-color:#b0331f !important;box-shadow:0 0 0 3px rgba(176,51,31,.16) !important}
+  .tc-form fieldset.tc-invalid .tc-opcion{border-color:#b0331f}
+  .tc-form fieldset.tc-invalid legend{color:#b0331f}
+  .tc-gracias{text-align:left;padding:30px 0;max-width:660px;margin:0 auto}
+  .tc-gracias h2{margin-top:0;font-family:'Cormorant Garamond',serif;font-weight:400;font-style:italic;font-size:clamp(28px,4vw,40px);color:#26221F}
+  .tc-trampa{position:absolute !important;left:-9999px !important;width:1px;height:1px;overflow:hidden}
+  /* sello decorativo del hero */
+  .preins-seal-wrap{position:absolute;top:clamp(18px,3vw,30px);right:clamp(-28px,-2vw,-6px);width:clamp(118px,15vw,176px);height:auto;transform:rotate(-8deg);pointer-events:none;z-index:0}
+  @media (max-width:560px){ .preins-seal-wrap{width:104px;top:8px;right:-18px;opacity:.9} .tc-form h1{max-width:72%} }
+  .seal text{font-family:'DM Sans',sans-serif;font-size:11.5px;letter-spacing:.14em;fill:currentColor}
+  .seal .yr{font-family:'Cormorant Garamond',serif;font-size:54px;letter-spacing:0;fill:currentColor}
+</style>
+<style>
+  .tc-form{padding-top:calc(var(--tc-hdr,76px) + clamp(30px,5vw,54px)) !important}
+  .tc-form .preins-seal-wrap{top:calc(var(--tc-hdr,76px) + clamp(16px,2vw,24px))}
+  .tc-form .tc-gracias,.tc-form fieldset,.tc-form .tc-campo{scroll-margin-top:calc(var(--tc-hdr,76px) + 16px)}
+  .tc-form label.tc-opcion{display:flex;align-items:center;padding:13px 15px}
+  .tc-form .tc-opcion input{margin:0}
+</style>
+<script>(function(){function fit(){var h=document.querySelector("body div[style*=\"position:fixed\"]");if(h&&h.offsetHeight)document.documentElement.style.setProperty("--tc-hdr",h.offsetHeight+"px");}document.addEventListener("DOMContentLoaded",fit);window.addEventListener("load",fit);window.addEventListener("resize",fit);})();</script>
+<script type="application/ld+json" id="tc-ld">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "EducationalOrganization",
+   "@id": "https://teatroconsciente.com.ar/#escuela",
+   "name": "Teatro Consciente",
+   "alternateName": [
+    "TC",
+    "Teatro Consciente - Escuela de formación actoral"
+   ],
+   "url": "https://teatroconsciente.com.ar/",
+   "slogan": "Teatro y escuela de formación actoral",
+   "foundingDate": "2015",
+   "description": "Teatro Consciente es un teatro independiente y una escuela de formación actoral fundada en 2015 por Ezequiel Sagasti, quien la dirige, con más de 10 años de trayectoria, en Vicente López, a 1 cuadra de CABA. Su formato de aprendizaje combina fuertes fundamentos teóricos de actuación clásica; un método propio de profundización, las imágenes resonantes, creado por Ezequiel Sagasti, publicado en su libro y presentado en Buenos Aires y en Madrid en 2026; un aprendizaje con foco en la salida laboral real; y un teatro propio, para que los alumnos no solo aprendan en clases sino arriba del escenario, con producciones reales. Dónde queda: Zufriategui 1387, Vicente López, Buenos Aires. A 1 cuadra de Núñez y Saavedra, Ciudad de Buenos Aires, y a 1 cuadra de Puente Saavedra, con múltiples conexiones de colectivos y trenes. Cerca de las estaciones Aristóbulo del Valle (Belgrano Norte) y Rivadavia (Mitre).",
+   "knowsAbout": [
+    "Actuación",
+    "Clases de teatro",
+    "Clases de actuación",
+    "Formación actoral",
+    "Teatro",
+    "Dirección teatral",
+    "Teatro independiente"
+   ],
+   "founder": {
+    "@id": "https://teatroconsciente.com.ar/#ezequiel-sagasti"
+   },
+   "member": [
+    {
+     "@id": "https://teatroconsciente.com.ar/#ezequiel-sagasti"
+    },
+    {
+     "@id": "https://teatroconsciente.com.ar/#gonza-saludjian"
+    },
+    {
+     "@id": "https://teatroconsciente.com.ar/#keisy-barrera"
+    },
+    {
+     "@id": "https://teatroconsciente.com.ar/#gonzalo-gravano"
+    },
+    {
+     "@id": "https://teatroconsciente.com.ar/#lucia-garcia"
+    }
+   ],
+   "location": {
+    "@id": "https://teatroconsciente.com.ar/#teatro"
+   },
+   "contactPoint": {
+    "@id": "https://teatroconsciente.com.ar/#contacto"
+   },
+   "email": "info@teatroconsciente.com.ar",
+   "telephone": "+54 9 11 5604-4945",
+   "inLanguage": "es-AR",
+   "sameAs": [
+    "https://www.instagram.com/teatroconsciente/",
+    "https://www.youtube.com/@teatroconsciente",
+    "https://www.tiktok.com/@teatro.consciente",
+    "https://www.alternativateatral.com/espacio7916-teatro-consciente"
+   ],
+   "areaServed": [
+    {
+     "@type": "City",
+     "name": "Vicente López"
+    },
+    {
+     "@type": "AdministrativeArea",
+     "name": "Ciudad Autónoma de Buenos Aires (CABA)"
+    },
+    {
+     "@type": "Place",
+     "name": "Saavedra, CABA"
+    },
+    {
+     "@type": "Place",
+     "name": "Núñez, CABA"
+    }
+   ]
+  },
+  {
+   "@type": "PerformingArtsTheater",
+   "@id": "https://teatroconsciente.com.ar/#teatro",
+   "name": "Teatro Consciente",
+   "url": "https://teatroconsciente.com.ar/",
+   "description": "Teatro independiente donde funciona la escuela, se producen obras y se reciben producciones de otros artistas y compañías. Sala principal con iluminación, sonido, telón, escenario y capacidad para 50 personas, una segunda sala que funciona como espacio social, un patio y la boletería. Zufriategui 1387, Vicente López, Buenos Aires. A 1 cuadra de Núñez y Saavedra, Ciudad de Buenos Aires, y a 1 cuadra de Puente Saavedra, con múltiples conexiones de colectivos y trenes. Cerca de las estaciones Aristóbulo del Valle (Belgrano Norte) y Rivadavia (Mitre).",
+   "maximumAttendeeCapacity": 50,
+   "publicAccess": true,
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Zufriategui 1387",
+    "addressLocality": "Vicente López",
+    "addressRegion": "Provincia de Buenos Aires",
+    "addressCountry": "AR"
+   },
+   "hasMap": "https://maps.app.goo.gl/Z2QFBXNE4f8smUWK9",
+   "containsPlace": [
+    {
+     "@type": "Place",
+     "name": "Sala principal",
+     "description": "Equipada con iluminación, sonido, telón y escenario. Capacidad para 50 personas.",
+     "maximumAttendeeCapacity": 50
+    },
+    {
+     "@type": "Place",
+     "name": "Espacio social",
+     "description": "Segunda sala que funciona como espacio social."
+    },
+    {
+     "@type": "Place",
+     "name": "Patio"
+    },
+    {
+     "@type": "Place",
+     "name": "Boletería"
+    }
+   ],
+   "additionalProperty": [
+    {
+     "@type": "PropertyValue",
+     "name": "Distancia a CABA",
+     "value": "1 cuadra"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Distancia a Puente Saavedra",
+     "value": "1 cuadra"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Estaciones de tren cercanas",
+     "value": "Aristóbulo del Valle (Belgrano Norte) y Rivadavia (Mitre)"
+    },
+    {
+     "@type": "PropertyValue",
+     "name": "Transporte público",
+     "value": "Múltiples conexiones de colectivos y trenes"
+    }
+   ],
+   "owner": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   },
+   "founder": {
+    "@id": "https://teatroconsciente.com.ar/#ezequiel-sagasti"
+   }
+  },
+  {
+   "@type": "Person",
+   "@id": "https://teatroconsciente.com.ar/#ezequiel-sagasti",
+   "name": "Ezequiel Sagasti",
+   "givenName": "Ezequiel",
+   "familyName": "Sagasti",
+   "jobTitle": "Fundador y director de Teatro Consciente",
+   "description": "Dramaturgo, director teatral y docente. Fundador y director de Teatro Consciente. Creador del método de las imágenes resonantes. En 2026 dirigió la obra «Glow Up» en el Teatro San Martín. Autor de «Teatro Consciente: Hacia un teatro fenomenológico» (Contratiempo, 2026).",
+   "url": "https://ezequielsagasti.com",
+   "sameAs": [
+    "https://ezequielsagasti.com"
+   ],
+   "worksFor": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   },
+   "knowsAbout": [
+    "Dramaturgia",
+    "Dirección teatral",
+    "Actuación",
+    "Formación actoral",
+    "Imágenes resonantes"
+   ]
+  },
+  {
+   "@type": "Person",
+   "@id": "https://teatroconsciente.com.ar/#gonzalo-gravano",
+   "name": "Gonzalo Gravano",
+   "alternateName": "Gonza Gravano",
+   "jobTitle": "Actor y docente de Teatro Consciente",
+   "description": "Actor y docente. Se formó con Ezequiel Sagasti en Teatro Consciente, donde hoy es docente. Codirigió junto a German Flood «Hijos de la muerte», obra de Ezequiel Sagasti producida por Teatro Consciente, y agotó una temporada entera. Protagonizó Sansón de las Islas en el Teatro San Martín (54 funciones) y en su gira por España (9 funciones en Madrid), y protagonizó la película Gatillero, que ganó 5 premios Sur. Fue nominado a Actor revelación en los Premios Cóndor de Plata.",
+   "worksFor": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   },
+   "alumniOf": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   }
+  },
+  {
+   "@type": "Person",
+   "@id": "https://teatroconsciente.com.ar/#gonza-saludjian",
+   "name": "Gonza Saludjián",
+   "jobTitle": "Docente de Teatro Consciente",
+   "worksFor": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   }
+  },
+  {
+   "@type": "Person",
+   "@id": "https://teatroconsciente.com.ar/#keisy-barrera",
+   "name": "Keisy Barrera",
+   "jobTitle": "Docente de Teatro Consciente",
+   "worksFor": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   }
+  },
+  {
+   "@type": "Person",
+   "@id": "https://teatroconsciente.com.ar/#lucia-garcia",
+   "name": "Lucía García",
+   "jobTitle": "Docente de Teatro Consciente",
+   "worksFor": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   }
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://teatroconsciente.com.ar/#website",
+   "url": "https://teatroconsciente.com.ar/",
+   "name": "Teatro Consciente",
+   "description": "Teatro independiente y escuela de formación actoral en Vicente López, a 1 cuadra de CABA.",
+   "inLanguage": "es-AR"
+  },
+  {
+   "@type": "ContactPoint",
+   "@id": "https://teatroconsciente.com.ar/#contacto",
+   "contactType": "Consultas, clases y alquiler de sala",
+   "email": "info@teatroconsciente.com.ar",
+   "telephone": "+54 9 11 5604-4945",
+   "availableLanguage": "es-AR",
+   "areaServed": "AR"
+  },
+  {
+   "@type": "Book",
+   "@id": "https://teatroconsciente.com.ar/#libro",
+   "name": "Teatro Consciente: Hacia un teatro fenomenológico",
+   "author": {
+    "@id": "https://teatroconsciente.com.ar/#ezequiel-sagasti"
+   },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Contratiempo"
+   },
+   "datePublished": "2026",
+   "inLanguage": "es-AR",
+   "url": "https://ezequielsagasti.com/libro.html"
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://teatroconsciente.com.ar/inscripcion.html#webpage",
+   "url": "https://teatroconsciente.com.ar/inscripcion.html",
+   "name": "Preinscripción 2027 | Teatro Consciente",
+   "description": "Formulario de preinscripción 2027 para alumnos nuevos y actuales. Después se coordina una entrevista virtual con el director, Ezequiel Sagasti.",
+   "inLanguage": "es-AR",
+   "isPartOf": {
+    "@id": "https://teatroconsciente.com.ar/#website"
+   },
+   "about": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   },
+   "mainEntity": {
+    "@id": "https://teatroconsciente.com.ar/#escuela"
+   },
+   "potentialAction": {
+    "@type": "RegisterAction",
+    "name": "Preinscribirse a Teatro Consciente 2027",
+    "target": {
+     "@type": "EntryPoint",
+     "urlTemplate": "https://teatroconsciente.com.ar/inscripcion.html"
+    }
+   }
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Inicio",
+     "item": "https://teatroconsciente.com.ar/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Preinscripción",
+     "item": "https://teatroconsciente.com.ar/inscripcion.html"
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+
+<div style="position:relative;overflow-x:clip" data-root="">
+<div style="position:fixed;top:0;left:0;right:0;z-index:40;background:#B23A2A;color:#EDE8DF">
+  <div style="max-width:min(1560px,96vw);margin:0 auto;display:flex;align-items:center;justify-content:flex-end;padding:18px clamp(20px,5vw,80px)">
+    <div style="display:flex;align-items:center;gap:clamp(16px,3vw,32px)">
+      <div class="desknav" style="display:flex;align-items:center;gap:clamp(16px,2.4vw,30px);font-size:11px;letter-spacing:.2em">
+        <a href="index.html" style="color:rgba(237,232,223,.78)">INICIO</a>
+        <a href="nosotros.html" style="color:rgba(237,232,223,.78)">NOSOTROS</a>
+        <a href="clases.html" style="color:rgba(237,232,223,.78)">CLASES</a>
+        <a href="teatro.html" style="color:rgba(237,232,223,.78)">TEATRO</a>
+        <a href="obras.html" style="color:rgba(237,232,223,.78)">PRODUCCIONES</a>
+        <a href="contacto.html" style="color:rgba(237,232,223,.78)">CONTACTO</a><a href="https://www.alternativateatral.com/espacio7916-teatro-consciente" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;border:1px solid rgba(237,232,223,.55);color:#EDE8DF;padding:7px 14px;border-radius:999px;font-size:10.5px;letter-spacing:.14em">ENTRADAS</a>
+      </div>
+      <button id="burger" class="burger" aria-label="Abrir menú"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+    </div>
+  </div>
+</div>
+<div id="pmenu" style="position:fixed;inset:0;z-index:50;background:#1B1613;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .4s ease, visibility .4s ease">
+  <div style="max-width:min(1560px,96vw);margin:0 auto;padding:26px clamp(20px,5vw,80px);display:flex;align-items:center;justify-content:flex-end">
+    <button id="pmenu-close" aria-label="Cerrar" style="background:none;border:none;cursor:pointer;color:#E5E2DA;font-size:30px;line-height:1;font-family:'Cormorant Garamond',serif">×</button>
+  </div>
+  <div style="max-width:min(1560px,96vw);margin:0 auto;padding:clamp(24px,6vh,70px) clamp(20px,5vw,80px);display:flex;flex-direction:column;gap:clamp(8px,1.4vh,18px)">
+    <a href="index.html" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">00</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">inicio</span></a>
+    <a href="nosotros.html" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">01</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">nosotros</span></a>
+    <a href="clases.html" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">02</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">clases</span></a>
+    <a href="teatro.html" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">03</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">teatro</span></a>
+    <a href="obras.html" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">04</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">producciones</span></a>
+    <a href="contacto.html" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">05</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">contacto</span></a>
+    <a href="https://www.alternativateatral.com/espacio7916-teatro-consciente" target="_blank" rel="noopener" style="display:flex;align-items:baseline;gap:20px;color:#E5E2DA"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#C2A15A">06</span><span style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,7vw,64px);font-weight:300">entradas</span></a>
+  </div>
+</div>
+
+<section style="max-width:min(1560px,96vw);margin:0 auto">
+<main class="tc-form">
+  <div class="preins-seal-wrap"><svg class="seal" viewBox="0 0 200 200" style="color:#B23A2A;display:block;width:100%;height:auto"><defs><path id="psl1" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"></path></defs><g class="pring"><text><textPath href="#psl1">PREINSCRIPCIONES · GUARDÁ TU LUGAR · RESERVA TU CUPO ·</textPath></text></g><text class="yr" x="100" y="100" text-anchor="middle" dominant-baseline="central">2027</text></svg></div>
+
+  <p class="tc-eyebrow">PREINSCRIPCIÓN 2027</p>
+  <h1>Teatro Consciente · Preinscripción 2027</h1>
+
+  <form id="tc-preinscripcion" novalidate="">
+
+    <!-- ===== Para todos ===== -->
+    <div class="tc-campo">
+      <label for="correo">Correo electrónico <span class="tc-req" aria-hidden="true">*</span></label>
+      <input type="email" id="correo" name="correo" autocomplete="email" required="">
+    </div>
+
+    <div class="tc-campo">
+      <label for="nombre">Nombre y apellido <span class="tc-req" aria-hidden="true">*</span></label>
+      <input type="text" id="nombre" name="nombre" autocomplete="name" required="">
+    </div>
+
+    <div class="tc-campo">
+      <label for="edad">Edad <span class="tc-req" aria-hidden="true">*</span></label>
+      <input type="number" id="edad" name="edad" inputmode="numeric" min="1" max="99" required="">
+    </div>
+
+    <div class="tc-campo">
+      <label for="whatsapp">WhatsApp <span class="tc-req" aria-hidden="true">*</span></label>
+      <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="Ej: 11 2345 6789" required="">
+    </div>
+
+    <div class="tc-campo">
+      <label for="instagram">Instagram</label>
+      <input type="text" id="instagram" name="instagram" placeholder="@tuusuario" autocapitalize="off" autocorrect="off">
+    </div>
+
+    <fieldset class="tc-campo">
+      <legend>¿Fuiste alumno/a de Teatro Consciente en 2026? <span class="tc-req" aria-hidden="true">*</span></legend>
+      <div class="tc-opciones">
+        <label class="tc-opcion"><input type="radio" name="es_alumno" value="Sí" required=""> Sí</label>
+        <label class="tc-opcion"><input type="radio" name="es_alumno" value="No"> No</label>
+      </div>
+    </fieldset>
+
+    <!-- ===== Solo para alumnos actuales (es_alumno = Sí) ===== -->
+    <div id="bloque-actual" class="tc-bloque" hidden="">
+      <div class="tc-campo">
+        <label for="grupo_actual">¿En qué grupo cursás hoy? <span class="tc-req" aria-hidden="true">*</span></label>
+        <span class="tc-ayuda">Docente, día y horario.</span>
+        <input type="text" id="grupo_actual" name="grupo_actual" required="">
+      </div>
+
+      <fieldset class="tc-campo">
+        <legend>Para 2027, ¿qué querés hacer? <span class="tc-req" aria-hidden="true">*</span></legend>
+        <div class="tc-opciones">
+          <label class="tc-opcion"><input type="radio" name="continuidad" value="Avanzar con mi grupo, mismo horario" required=""> Quiero avanzar con mi grupo, en el mismo horario</label>
+          <label class="tc-opcion"><input type="radio" name="continuidad" value="Cambiar grupo u horario"> Quiero cambiar de grupo u horario</label>
+        </div>
+      </fieldset>
+
+      <div id="bloque-cambio" hidden="">
+        <div class="tc-campo">
+          <label for="cambio_detalle">Contanos qué te gustaría cambiar <span class="tc-req" aria-hidden="true">*</span></label>
+          <textarea id="cambio_detalle" name="cambio_detalle" required=""></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Solo para alumnos nuevos (es_alumno = No) ===== -->
+    <div id="bloque-nuevo" class="tc-bloque" hidden="">
+      <div class="tc-aviso">
+        <p><strong>¡Qué bueno que quieras ser parte!</strong></p>
+        <p>Te vamos a contactar durante febrero, para coordinar una entrevista virtual con nuestro director, Ezequiel Sagasti.</p>
+        <p>Es un espacio para conocernos, charlar sobre la metodología y acompañarte a elegir el grupo que mejor se ajuste a tu recorrido.</p>
+      </div>
+
+      <div class="tc-campo">
+        <label for="experiencia">¿Tenés experiencia en clases de teatro? <span class="tc-req" aria-hidden="true">*</span></label>
+        <span class="tc-ayuda">Si tenés, contanos cuándo, dónde y con qué docentes.</span>
+        <textarea id="experiencia" name="experiencia" placeholder="Si no tenés, escribí “No”" required=""></textarea>
+      </div>
+
+      <div class="tc-campo">
+        <label for="razon">¿Cuál es tu razón principal para tomar clases acá? <span class="tc-req" aria-hidden="true">*</span></label>
+        <select id="razon" name="razon" required="">
+          <option value="" selected="" disabled="">Elegí</option>
+          <option>Me interesa formarme con la metodología y los docentes de Teatro Consciente 📘</option>
+          <option>Busco desarrollar una carrera como actor/actriz 🎬</option>
+          <option>Por hobby, para divertirme y conocer gente nueva 😁</option>
+          <option>Para ganar horas de escenario reales 🎭</option>
+          <option>Para ganar confianza y seguridad al expresarme ❤️</option>
+          <option>Por curiosidad, para experimentar algo diferente 🚀</option>
+        </select>
+      </div>
+
+      <div class="tc-campo">
+        <label for="nivel">¿Cuál creés que es el nivel adecuado para vos? <span class="tc-req" aria-hidden="true">*</span></label>
+        <span class="tc-ayuda">¡No te preocupes, es para orientarnos! Nosotros te vamos a acompañar en la elección del grupo más adecuado para tu recorrido.</span>
+        <select id="nivel" name="nivel" required="">
+          <option value="" selected="" disabled="">Elegí</option>
+          <option>Inicial</option>
+          <option>Intermedio</option>
+          <option>Avanzado</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- ===== Para todos ===== -->
+    <fieldset class="tc-campo">
+      <legend>Estamos evaluando abrir un taller de verano. ¿Te interesaría? <span class="tc-req" aria-hidden="true">*</span></legend>
+      <div class="tc-opciones">
+        <label class="tc-opcion"><input type="radio" name="taller_verano" value="Sí" required=""> Sí</label>
+        <label class="tc-opcion"><input type="radio" name="taller_verano" value="No"> No</label>
+      </div>
+    </fieldset>
+
+    <div class="tc-campo">
+      <label for="comentarios">¿Querés comentarnos algo más? <span class="tc-ayuda" style="display:inline">(opcional)</span></label>
+      <textarea id="comentarios" name="comentarios"></textarea>
+    </div>
+
+    <!-- Solo alumnos nuevos -->
+    <div id="bloque-info" hidden="">
+    <h2>Información importante</h2>
+    <div class="tc-info">
+      <p><strong>Cupo por clase</strong>16 personas. Los grupos son reducidos para acompañar mejor el recorrido de cada uno.</p>
+      <p><strong>Pagos</strong>Las cuotas se abonan de marzo a diciembre, inclusive. Si te ausentás por vacaciones, la cuota se paga el mes completo para mantener tu lugar. Si no, la vacante se libera para otra persona.</p>
+      <p><strong>Feriados y vacaciones</strong>En vacaciones de invierno pausamos una semana. En feriados, la clase se dicta si al menos el 60% del grupo confirma asistencia.</p>
+      <p><strong>Comienzo de clases</strong>Arrancamos a principios de marzo en nuestro teatro (Zufriategui 1387, Vicente López).</p>
+    </div>
+    </div>
+
+    <!-- campo trampa para bots: las personas no lo ven -->
+    <div class="tc-trampa" aria-hidden="true">
+      <label>No completar este campo <input type="text" name="empresa" tabindex="-1" autocomplete="off"></label>
+    </div>
+
+    <button type="submit" class="tc-enviar">Enviar preinscripción</button>
+    <div id="tc-estado" class="tc-estado" role="alert" aria-live="assertive"></div>
+  </form>
+
+  <div id="gracias-actual" class="tc-gracias" hidden="">
+    <h2>¡Listo! Recibimos tu preinscripción.</h2>
+    <p class="tc-lead">Gracias por querer seguir siendo parte de Teatro Consciente. Nos vemos en 2027 ❤️‍🔥</p>
+  </div>
+
+  <div id="gracias-nuevo" class="tc-gracias" hidden="">
+    <h2>¡Recibimos tu preinscripción!</h2>
+    <p class="tc-lead">Te vamos a escribir en febrero para coordinar la entrevista. Cualquier duda nos podés hablar por nuestros canales de contacto.</p>
+  </div>
+
+</main>
+</section>
+
+<div style="background:#1B1613;color:#EDE8DF;border-top:1px solid rgba(237,232,223,.12)">
+  <div style="max-width:min(1560px,96vw);margin:0 auto;padding:clamp(28px,4vw,44px) clamp(20px,5vw,80px);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+    <a href="index.html" style="font-size:11px;letter-spacing:.2em;color:#E5E2DA">← VOLVER AL INICIO</a>
+  </div>
+</div>
+</div>
+
+
+<script>document.addEventListener("DOMContentLoaded",function(){
+    var menu=document.getElementById('pmenu');
+    var open=document.getElementById('burger');
+    var close=document.getElementById('pmenu-close');
+    function setMenu(v){ if(!menu) return; if(v){menu.style.opacity='1';menu.style.visibility='visible';menu.style.pointerEvents='auto';} else {menu.style.opacity='0';menu.style.visibility='hidden';menu.style.pointerEvents='none';} }
+    if(open) open.addEventListener('click',function(){setMenu(true);});
+    if(close) close.addEventListener('click',function(){setMenu(false);});
+    if(menu) menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+
+    var URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbxa_1dWtVWoKH_ujhb9eTywTXpt4J_mYUt0JrVX-mGDPeZMNx1mv7DVgFoDGbQExSCFeg/exec';
+    var form = document.getElementById('tc-preinscripcion');
+    if(!form) return;
+    var estado = document.getElementById('tc-estado');
+    var graciasActual = document.getElementById('gracias-actual');
+    var graciasNuevo = document.getElementById('gracias-nuevo');
+    var boton = form.querySelector('.tc-enviar');
+    var bloqueActual = document.getElementById('bloque-actual');
+    var bloqueNuevo = document.getElementById('bloque-nuevo');
+    var bloqueCambio = document.getElementById('bloque-cambio');
+    var bloqueInfo = document.getElementById('bloque-info');
+
+    function mostrar(bloque, visible){
+      bloque.hidden = !visible;
+      bloque.querySelectorAll('input, textarea, select').forEach(function(el){ el.disabled = !visible; });
+    }
+    mostrar(bloqueActual, false);
+    mostrar(bloqueNuevo, false);
+    mostrar(bloqueCambio, false);
+    mostrar(bloqueInfo, false);
+
+    form.querySelectorAll('input[name="es_alumno"]').forEach(function(radio){
+      radio.addEventListener('change', function(){
+        var esActual = radio.value === 'Sí';
+        mostrar(bloqueActual, esActual);
+        mostrar(bloqueNuevo, !esActual);
+        mostrar(bloqueInfo, !esActual);
+        if (esActual) {
+          var marcada = form.querySelector('input[name="continuidad"]:checked');
+          mostrar(bloqueCambio, !!marcada && marcada.value === 'Cambiar grupo u horario');
+        }
+      });
+    });
+    form.querySelectorAll('input[name="continuidad"]').forEach(function(radio){
+      radio.addEventListener('change', function(){
+        mostrar(bloqueCambio, radio.value === 'Cambiar grupo u horario');
+      });
+    });
+
+    function mensaje(texto, clase){ estado.textContent = texto; estado.className = 'tc-estado' + (clase ? ' ' + clase : ''); }
+
+    var LABELS = {
+      correo:'Correo electrónico', nombre:'Nombre y apellido', edad:'Edad', whatsapp:'WhatsApp',
+      es_alumno:'Si fuiste alumno/a en 2026', grupo_actual:'En qué grupo cursás hoy',
+      continuidad:'Qué querés hacer en 2027', cambio_detalle:'Qué te gustaría cambiar',
+      experiencia:'Si tenés experiencia en teatro', razon:'Tu razón principal',
+      nivel:'El nivel que creés adecuado', taller_verano:'Si te interesa el taller de verano'
+    };
+
+    form.addEventListener('input', function(e){ if(e.target.classList) e.target.classList.remove('tc-invalid'); });
+    form.addEventListener('change', function(e){
+      if(e.target.classList) e.target.classList.remove('tc-invalid');
+      var fs = e.target.closest && e.target.closest('fieldset'); if(fs) fs.classList.remove('tc-invalid');
+    });
+
+    function validar(){
+      form.querySelectorAll('.tc-invalid').forEach(function(el){ el.classList.remove('tc-invalid'); });
+      var errores = [], primero = null;
+      function add(el, msg){ errores.push(msg); if(!primero) primero = el; }
+      ['es_alumno','continuidad','taller_verano'].forEach(function(name){
+        var group = form.querySelectorAll('input[name="'+name+'"]');
+        if(!group.length || group[0].disabled) return;
+        var checked = Array.prototype.some.call(group, function(r){ return r.checked; });
+        if(!checked){ var fs = group[0].closest('fieldset'); if(fs) fs.classList.add('tc-invalid'); add(fs || group[0], LABELS[name]); }
+      });
+      form.querySelectorAll('input[required]:not([type=radio]), select[required], textarea[required]').forEach(function(el){
+        if(el.disabled) return;
+        if(!el.validity.valid){
+          el.classList.add('tc-invalid');
+          var base = LABELS[el.name] || el.name, msg = base;
+          if(el.validity.typeMismatch && el.type === 'email') msg = base + ' (revisá el formato, ej: vos@mail.com)';
+          else if(el.validity.rangeUnderflow || el.validity.rangeOverflow || el.validity.badInput) msg = base + ' (un número entre 1 y 99)';
+          add(el, msg);
+        }
+      });
+      return { errores: errores, primero: primero };
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var v = validar();
+      if(v.errores.length){
+        estado.className = 'tc-estado error';
+        estado.innerHTML = '<strong>Te faltan completar algunos campos:</strong><ul>' +
+          v.errores.map(function(m){ return '<li>' + m + '</li>'; }).join('') + '</ul>';
+        if(v.primero){
+          var foco = v.primero.querySelector ? (v.primero.querySelector('input,select,textarea') || v.primero) : v.primero;
+          try{ foco.focus({ preventScroll:true }); }catch(err){}
+          (v.primero.scrollIntoView ? v.primero : foco).scrollIntoView({ behavior:'smooth', block:'center' });
+        }
+        return;
+      }
+      boton.disabled = true;
+      mensaje('Enviando…', 'sending');
+
+      // Esperamos la confirmación real del script de Google: solo si responde {ok:true} mostramos el "gracias".
+      var ctrl = ('AbortController' in window) ? new AbortController() : null;
+      var limite = setTimeout(function(){ if(ctrl) ctrl.abort(); }, 20000);
+      var opciones = { method: 'POST', body: new URLSearchParams(new FormData(form)) };
+      if (ctrl) opciones.signal = ctrl.signal;
+
+      fetch(URL_SCRIPT, opciones).then(function(res){
+        return res.text();
+      }).then(function(texto){
+        clearTimeout(limite);
+        var r = null;
+        try { r = JSON.parse(texto); } catch(err) {}
+        if (!r || r.ok !== true) throw new Error('sin confirmación');
+        var esActual = form.querySelector('input[name="es_alumno"]:checked').value === 'Sí';
+        var gracias = esActual ? graciasActual : graciasNuevo;
+        form.hidden = true;
+        gracias.hidden = false;
+        gracias.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }).catch(function(){
+        clearTimeout(limite);
+        boton.disabled = false;
+        estado.className = 'tc-estado error';
+        estado.innerHTML = '<strong>No pudimos confirmar tu preinscripción.</strong>' +
+          'Tus respuestas siguen acá: probá enviar de nuevo en un rato. Si vuelve a pasar, escribinos por ' +
+          '<a href="https://wa.me/5491156044945" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">WhatsApp</a>.';
+      });
+    });
+  });</script>
+</body>
+</html>

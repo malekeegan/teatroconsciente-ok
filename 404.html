@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Página no encontrada — Teatro Consciente</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="La página que buscás no existe. Volvé al inicio de Teatro Consciente.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiNCMjNBMkEiLz48dGV4dCB4PSIzMiIgeT0iNDQiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLHNlcmlmIiBmb250LXNpemU9IjM0IiBmaWxsPSIjRjRGMUU5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5UQzwvdGV4dD48L3N2Zz4K">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+::selection{background:#B23A2A;color:#E5E2DA}
+html,body{height:100%}
+body{background:#0E0D0C;color:#EDE8DF;font-family:'DM Sans',system-ui,sans-serif;overflow-x:hidden}
+.tc404{position:relative;min-height:100svh;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;isolation:isolate}
+@supports (height:100svh){.tc404{min-height:100svh}}
+/* Piso del escenario */
+.tc404::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24%;background:#181716;z-index:-3}
+/* Cono de luz */
+.luz{position:absolute;top:0;left:50%;width:min(64vw,840px);height:84%;transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(255,255,255,.13),rgba(255,255,255,.05) 70%,rgba(255,255,255,0));
+  clip-path:polygon(41% 0,59% 0,100% 100%,0 100%);filter:blur(2px);z-index:-2;pointer-events:none}
+/* Halo sobre el piso */
+.halo{position:absolute;left:50%;bottom:6%;width:min(70vw,900px);height:34%;transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.07),rgba(255,255,255,0) 65%);z-index:-2;pointer-events:none}
+.num{position:absolute;z-index:-1;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;color:#B23A2A;
+  opacity:.9;line-height:.8;letter-spacing:-.02em;white-space:nowrap;pointer-events:none;user-select:none;
+  font-size:clamp(240px,38vw,560px);left:53%;top:30%}
+.txt{position:relative;margin:48px 0;text-align:center;padding:0 24px;max-width:900px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,4.4vw,62px);line-height:1.1;letter-spacing:.01em;color:#F4F1E9}
+p{margin-top:clamp(16px,2vw,24px);font-size:clamp(14px,1.15vw,16px);line-height:1.7;color:rgba(237,232,223,.82)}
+a.volver{display:inline-flex;align-items:center;gap:8px;margin-top:clamp(16px,1.6vw,22px);padding:0 0 8px;
+  font-size:11px;font-weight:500;letter-spacing:.2em;color:#EDE8DF;border-bottom:1px solid #B23A2A;text-decoration:none;transition:color .25s ease,border-color .25s ease}
+a.volver:hover,a.volver:focus-visible{color:#fff;border-color:#d0655a}
+a.volver:focus-visible{outline:1px solid #d0655a;outline-offset:6px}
+@media (max-width:768px){
+  .luz{width:84vw;height:78%}
+  .num{font-size:clamp(150px,56vw,260px);left:auto;right:-13vw;top:calc(50% - 46vw - 70px)}
+  h1{font-size:clamp(28px,8vw,36px);max-width:7.4em;margin:0 auto}
+  p{max-width:24em;margin-left:auto;margin-right:auto}
+}
+@media (max-height:520px) and (orientation:landscape){.num{font-size:clamp(130px,24vw,200px);right:-3vw;left:auto;top:-2vh;transform:none}}
+</style>
+</head>
+<body>
+<main class="tc404">
+  <div class="luz" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="num" aria-hidden="true">404</div>
+  <div class="txt">
+    <h1>Esta escena no está en el guión.</h1>
+    <p>Parece que la página que buscás nunca se escribió, o se fue de gira.</p>
+    <a class="volver" href="/">→ VOLVER AL INICIO</a>
+  </div>
+</main>
+</body>
+</html>
